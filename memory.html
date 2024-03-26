@@ -1,0 +1,494 @@
+<script>
+
+var data = [
+    {
+        q:"Wo befindet sich der zentrale Lebensraum von Tigern?",
+        a: "In Asien."
+    },
+    {
+        q:"Wo befindet sich der zentrale Lebensraum von Löwen?",
+        a: "In Afrika."
+    },
+    {
+        q:"Was ist das größte Land-Raubtier?",
+        a: "Der Kodiak-Bär."
+    },
+    {
+        q:"Was ist das Größte Tier der Welt?",
+        a: "Der Blauwal."
+    },
+    {
+        q:"Zu welcher Tierart zählen Delfine?",
+        a: "Säugetiere."
+    },
+    {
+        q:"Welches Tier hat den besten Geruchssinn?",
+        a: "Der Europäische Aal."
+    },
+    {
+        q:"Welches Tier hat die besten Augen?",
+        a: "Der Adler."
+    },
+    {
+        q:"Was ist das schnellste Tier der Welt?",
+        a: "Der Wanderfalke."
+    },
+    {
+        q:"Wo befindet sich der Lebensraum von Koalas?",
+        a: "In Australien."
+    },
+];
+
+
+</script>
+
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membery</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+} 
+
+.header {
+    height: 8vh;
+    width: 100%;
+    background: #1b1b1b;
+    font-size: 60px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 1px 4px 4px rgba(20, 20, 20, 0.3);
+    position: relative;
+    z-index: 200;
+}
+
+.subheader {
+    display: flex;
+    align-items: center;
+    height: 4vh;
+    background-color: #2a3e51;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    box-sizing: border-box;
+    justify-content: stretch;
+    box-shadow: 0px 1px 4px 4px rgba(20, 20, 20, 0.3);
+    position: relative;
+    z-index: 190;
+}
+
+.subheader > * {
+    
+    padding: 0 10px;
+}
+
+.content {
+    height: 84vh;
+    background-color: rgb(98, 134, 233);
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    height: 4vh;
+    background: #1b1b1b;
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 0 10px;
+    box-sizing: border-box;
+
+}
+
+.logo {
+    margin-left: 10px;
+    height: 40px;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    flex-wrap: wrap;
+    padding: 10px;
+    height: 88vh;
+    box-sizing: border-box;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+#q-container {
+    border-right: 2px dashed #1b1b1b;;
+}
+
+.gamecard {
+    width: 23%;
+    margin: 1.5%; /* Margin refers to vp width, width to container width*/
+}
+
+.gamecard img {
+    width: 100%;
+    border: 10px solid white;
+    box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow: 3px 3px rgba(20, 20, 20, 0.5);
+    transition: transform .2s; /* Animation */
+}
+
+
+.gamecard img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    border-color: rgb(240, 59, 59);
+}
+
+
+.content {
+    position: relative;
+}
+
+.show-cards {
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    left: 0;
+    top: 50px;
+    width: 100%;
+    pointer-events: none;
+}
+
+.active-card-container {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.active-card {
+    width: 80%;
+    height: 50vh;
+    background: #7265d8;
+    border: 20px solid white;
+    box-sizing: border-box;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    box-shadow: 0px 0px 0px 3px rgba(20, 20, 20, 0.5);
+    pointer-events: all;
+    display: flex;
+}
+
+.active-card button {
+    padding: 15px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background: white;
+    border: 2px solid black;
+    margin: 15px;
+}
+
+.active-card button:hover {
+    background: gray;
+    cursor: pointer;
+}
+
+.active-card-heading {
+    background: white;
+    color: #7265d8;
+}
+
+.active-card-content {
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: inherit;
+}
+	
+.row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+ 
+.col {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+
+.center {
+    justify-content: center;
+    align-items: center;
+}
+
+.row.left {
+    justify-content: flex-start !important;
+}
+
+.col.left {
+    align-items: flex-start !important;
+}
+
+.row.right {
+    justify-content: flex-end !important;
+}
+
+.col.right {
+    align-items: flex-end !important;
+}
+
+.row.top {
+    align-items: flex-start !important;
+}
+
+.col.top {
+    justify-content: flex-start !important;
+}
+
+.row.bottom {
+    align-items: flex-end !important;
+}
+
+.col.bottom {
+    justify-content: flex-end !important;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.item-left {
+    margin-right: auto !important;
+}
+
+.item-right {
+    margin-left: auto !important;
+}
+
+.item-top {
+    margin-bottom: auto !important;
+}
+.item-bottom {
+    margin-top: auto !important;
+}
+	</style>
+<script>
+class Game {
+    static data;
+    static selectedQuestion = -1;
+    static selectedAnswer = -1;
+
+    static start(data) { 
+        
+        Game.data = data;
+
+
+        // Generate Random question indices
+        let qarr = Game.getRandomNumberArray([], 0, data.length-1);
+        let aarr = Game.getRandomNumberArray([], 0, data.length-1);
+
+        for(let i = 0; i < data.length; i++) {
+            
+            let qid = "q" + qarr[i];
+            let aid = "a" + aarr[i];
+
+            let card1 = document.createElement("div");
+            card1.classList.add("gamecard");
+
+            let img = document.createElement("img");
+            img.src = "images/background-idle.png";
+
+            card1.appendChild(img);
+
+            let card2 = card1.cloneNode(true);
+
+            let factor = Math.round(Math.random()) == 1 ? 1 : -1;
+            let rand = Math.floor(Math.random()*10) * factor;
+            card1.style.transform = "rotate("+ rand +"deg)";
+            factor = Math.round(Math.random()) == 1 ? 1 : -1;
+            rand = Math.floor(Math.random()*10) * factor;
+            card2.style.transform = "rotate("+ rand +"deg)";
+
+            let questionContainer = document.getElementById("q-container");
+            let answerContainer = document.getElementById("a-container");
+            questionContainer.appendChild(card1);
+            answerContainer.appendChild(card2);
+
+            card1.id = qid;
+            card2.id = aid;
+            card1.onclick = Game.toggleQuestion;
+            card2.onclick = Game.toggleAnswer;
+        }
+
+    }
+
+    static getRandBetween(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    static getRandomNumberArray(arr, currentIndex, maxIndex) {
+        let rand = Game.getRandBetween(0, maxIndex);
+        if(!arr.includes(rand)) {
+            arr[currentIndex] = rand;
+            if(currentIndex == maxIndex) {
+                return arr;
+            }
+            else {
+                return Game.getRandomNumberArray(arr, currentIndex+1, maxIndex);
+            }
+        }
+        else {
+            return Game.getRandomNumberArray(arr, currentIndex, maxIndex);
+        }
+    }
+
+
+    static toggleQuestion(e) {
+        let question = document.getElementById("question");
+        let questionContent = document.getElementById("question-content")
+
+        question.classList.toggle("visible");
+        question.classList.toggle("hidden");
+
+        if(e) {
+            let index = e.target.parentElement.id.substring(1);
+            questionContent.innerHTML = Game.data[index].q;
+            Game.selectedQuestion = index;
+        }
+        else {
+            Game.selectedQuestion = -1;
+        }
+    }
+    static toggleAnswer(e) {
+        let answer = document.getElementById("answer");
+        let answerContent = document.getElementById("answer-content")
+
+        answer.classList.toggle("visible");
+        answer.classList.toggle("hidden");
+        
+        if(e) {
+            let index = e.target.parentElement.id.substring(1);
+            answerContent.innerHTML = Game.data[index].a;
+            Game.selectedAnswer = index;
+        }
+        else {
+            Game.selectedAnswer = -1;
+        }
+    }
+
+    static match() {
+        if(Game.selectedAnswer == Game.selectedQuestion) {
+            let index = Game.selectedAnswer;
+            console.log("MATCH");
+            Game.toggleAnswer();
+            Game.toggleQuestion();
+            let qcard = document.getElementById("q" + index);
+            qcard.children[0].src = "images/background-match.png";
+            let acard = document.getElementById("a" + index);
+            acard.children[0].src = "images/background-match.png";
+        }
+        else {
+            console.log("KEIN MATCH");
+        }
+    }
+}
+
+
+</script>
+</head>
+<body>
+    
+    <div class="header">
+        <img class="logo" src="images/logo.png">
+    </div>
+    <div class="subheader">
+        <div class="row">Fragen</div>
+        <div class="row">Antworten</div>
+    </div>
+    <div class="content">
+        <div class="game-container">
+            <div id="q-container" class="container"></div>
+            <div id="a-container" class="container"></div>
+        </div>
+    
+        <div class="show-cards">
+            <div class="active-card-container">
+                <div id="question" class="active-card hidden">
+                    <div class="col">
+                        <div class="active-card-heading col center">
+                            Frage
+                        </div>
+                        <div id="question-content" class="active-card-content col center">
+                            Ist das eine Frage?
+                        </div>
+                        <div class="row center item-bottom">
+                            <button onclick="Game.toggleQuestion()">Abort</button>
+                            <button onclick="Game.match()">Match</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="active-card-container">
+                <div id="answer" class="active-card hidden">
+                    <div class="col">
+                        <div class="active-card-heading col center">
+                            Antwort
+                        </div>
+                        <div id="answer-content" class="active-card-content col center">
+                            Ja und das eine Antwort!
+                        </div>
+                        <div class="row center item-bottom">
+                            <button onclick="Game.toggleAnswer()">Abort</button>
+                            <button onclick="Game.match()">Match</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        <div class="footer row">
+            <div class="item-right">Membery | (c) 2021 | by JAck | Version 1.0</div>
+        </div>
+    </div>
+    
+    
+    <script>
+        Game.start(data);
+    </script>
+
+</body>
+</html>
